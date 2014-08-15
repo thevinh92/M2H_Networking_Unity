@@ -1,0 +1,4 @@
+static var desplay = 100;
+function OnGUI () {
+GUI.Label (Rect (10, 200, 100, 20),"Health:" + desplay);
+}

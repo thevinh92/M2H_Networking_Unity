@@ -1,0 +1,16 @@
+static var Player: Transform;
+var spawn : Transform;
+function Update () {
+if(Player.networkView.isMine==true){
+if(NetworkHealth.dead == true){
+
+Player.transform.position = spawn.position;
+NetworkHealth.health = 100;
+NetworkHealth.dead=false;
+}
+
+
+}
+
+
+}

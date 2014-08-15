@@ -1,0 +1,43 @@
+var Tag = "bullet";
+static var health = 100;
+
+var useScript = false;
+static var dead = false;
+
+var bigbullethurt = 50;
+function OnTriggerEnter (player) 
+
+{if(useScript==true){
+
+if(player.gameObject.tag == "Bullet"){
+health -=bigbullethurt;
+}
+}
+}
+
+function Update (){
+if(useScript==true){  DesplayHealth.desplay = health;}
+if(health <1){if(useScript == true){
+
+  DesplayHealth.desplay = health;
+dead = true;
+health = 100;
+}
+}
+}
+
+function OnGUI (){
+
+}
+
+function OnNetworkInstantiate (msg : NetworkMessageInfo) {
+if(networkView.isMine == true){
+  DesplayHealth.desplay = health;
+  useScript = true;
+  RespawnNetwork.Player=transform;
+}
+else{
+useScript = false;
+}
+}
+

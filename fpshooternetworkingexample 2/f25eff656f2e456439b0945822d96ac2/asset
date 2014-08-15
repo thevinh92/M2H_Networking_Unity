@@ -1,0 +1,28 @@
+var bullet : Transform;
+var spawnpoint: Transform;
+var Force = 2000;
+
+var autoSpawnpoint = false;
+
+var canControl = true;
+function Update () {
+if(canControl == true){
+
+if(Input.GetButtonUp("Fire1")){
+var shot =Network.Instantiate(bullet, spawnpoint.position, transform.rotation, 0);
+shot.rigidbody.AddForce(transform.forward * Force);
+}
+}
+}
+
+function LateUpdate(){
+if(networkView.isMine ==true){
+canControl = true;
+}
+else {
+canControl = false;
+}
+if(autoSpawnpoint == true){
+spawnpoint = transform;
+}
+}

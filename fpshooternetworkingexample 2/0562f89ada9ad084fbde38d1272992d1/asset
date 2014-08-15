@@ -1,0 +1,14 @@
+function OnNetworkInstantiate (msg : NetworkMessageInfo) {
+	// This is our own player
+	if (networkView.isMine)
+	{
+		
+		GetComponent("NetworkInterpolatedTransform").enabled = false;
+	}
+	// This is just some remote controlled player
+	else
+	{
+	
+		GetComponent("NetworkInterpolatedTransform").enabled = true;
+	}
+}

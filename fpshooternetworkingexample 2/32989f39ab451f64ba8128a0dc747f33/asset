@@ -1,0 +1,9 @@
+var cubeRenderer : Renderer ;
+function Update () {
+if(NetworkHealth.health<51){
+cubeRenderer.material.color = Color.blue;
+}
+if(NetworkHealth.health<1){
+cubeRenderer.material.color = Color.red;
+}
+}

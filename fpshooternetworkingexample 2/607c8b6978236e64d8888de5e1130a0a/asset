@@ -1,0 +1,4 @@
+
+function Update () {
+Network.Destroy(gameObject);
+}

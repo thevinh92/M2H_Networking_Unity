@@ -1,0 +1,10 @@
+
+function OnNetworkInstantiate (msg : NetworkMessageInfo) {
+var Camera1 =camera;
+if(networkView.isMine == true){
+   camera.enabled = true;
+   Camera1.enabled = true;
+}
+else{Camera1.enabled = false;}
+     camera.enabled = false;
+}

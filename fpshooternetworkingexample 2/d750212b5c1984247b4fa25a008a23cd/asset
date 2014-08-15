@@ -1,0 +1,20 @@
+var player : GameObject;
+var playerstag = "Player";
+var explosion : Transform;
+
+static var Updatenow = false;
+
+
+
+
+
+function OnCollisionEnter (hit:Collision) {
+
+
+  
+Destroy(gameObject);
+}
+
+
+
+
