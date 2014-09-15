@@ -1,4 +1,5 @@
-﻿// Converted from UnityScript to C# at http://www.M2H.nl/files/js_to_c.php - by Mike Hergaarden
+﻿
+// Converted from UnityScript to C# at http://www.M2H.nl/files/js_to_c.php - by Mike Hergaarden
 // Do test the code! You usually need to change a few small bits.
 
 using UnityEngine;
@@ -35,7 +36,11 @@ public class CSharpTutorial_3_Spawnscript : MonoBehaviour {
 		
 		int playerNumber = int.Parse(newPlayer+"");
 		//Instantiate a new object for this player, remember; the server is therefore the owner.
-		Transform myNewTrans = ((GameObject)Network.Instantiate(playerPrefab, transform.position, transform.rotation, playerNumber)).transform;
+//		GameObject myNewGO = new GameObject();
+		Transform myNewTrans = (( Network.Instantiate(playerPrefab, transform.position, transform.rotation, playerNumber)) as Transform);
+
+//		Transform myNewTrans = myNewGO.transform;
+//		myNewTrans = ((GameObject)( Network.Instantiate(playerPrefab, transform.position, transform.rotation, playerNumber))).transform;
 		
 		//Get the networkview of this new transform
 		NetworkView newObjectsNetworkview = myNewTrans.networkView;
@@ -53,7 +58,7 @@ public class CSharpTutorial_3_Spawnscript : MonoBehaviour {
 		Debug.Log("Clean up after player " + player);
 		
 		foreach(CSharpTurorial_3_Playerscript script in playerScripts){
-			if(player == script.owner){//We found the players object
+			if(player==script.owner){//We found the players object
 				Network.RemoveRPCs(script.gameObject.networkView.viewID);//remove the bufferd SetPlayer call
 				Network.Destroy(script.gameObject);//Destroying the GO will destroy everything
 				playerScripts.Remove(script);//Remove this player from the list

@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// Converted from UnityScript to C# at http://www.M2H.nl/files/js_to_c.php - by Mike Hergaarden
+// Do test the code! You usually need to change a few small bits.
+
+using UnityEngine;
 using System.Collections;
 
 public class CSharpTurorial_3_Playerscript : MonoBehaviour {
@@ -45,7 +48,7 @@ public class CSharpTurorial_3_Playerscript : MonoBehaviour {
 	void  Update (){
 		
 		//Client code
-		if(owner!=null && Network.player==owner){
+		if(owner != null && Network.player == owner){
 			//Only the client that owns this object executes this code
 			float HInput = Input.GetAxis("Horizontal");
 			float VInput = Input.GetAxis("Vertical");
@@ -57,7 +60,7 @@ public class CSharpTurorial_3_Playerscript : MonoBehaviour {
 				
 				if(Network.isServer){
 					//Too bad a server can't send an rpc to itself using "RPCMode.Server"!...bugged :[
-					SendMovementInput(HInput, VInput);
+//					SendMovementInput(HInput, VInput);
 				}else if(Network.isClient){
 					//SendMovementInput(HInput, VInput); //Use this (and line 64) for simple "prediction"
 					networkView.RPC("SendMovementInput", RPCMode.Server, HInput, VInput);
@@ -67,7 +70,7 @@ public class CSharpTurorial_3_Playerscript : MonoBehaviour {
 		}
 		
 		//Server movement code
-		if(Network.isServer){//Also enable this on the client itself: "|| Network.player==owner){|"
+		if(Network.isServer || Network.player==owner){//Also enable this on the client itself: "|| Network.player==owner){|"
 			//Actually move the player using his/her input
 			Vector3 moveDirection = new Vector3(serverCurrentHInput, 0, serverCurrentVInput);
 			float speed = 5;
@@ -104,9 +107,9 @@ public class CSharpTurorial_3_Playerscript : MonoBehaviour {
 			
 			//We've just recieved the current servers position of this object in 'posReceive'.
 			
-			transform.position = posReceive;		
+//			transform.position = posReceive;		
 			//To reduce laggy movement a bit you could comment the line above and use position lerping below instead:	
-			//transform.position = Vector3.Lerp(transform.position, posReceive, 0.9f); //"lerp" to the posReceive by 90%
+			transform.position = Vector3.Lerp(transform.position, posReceive, 0.9f); //"lerp" to the posReceive by 90%
 			
 		}
 	}
