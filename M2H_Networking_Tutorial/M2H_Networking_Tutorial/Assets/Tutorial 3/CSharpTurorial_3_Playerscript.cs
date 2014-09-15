@@ -60,7 +60,7 @@ public class CSharpTurorial_3_Playerscript : MonoBehaviour {
 				
 				if(Network.isServer){
 					//Too bad a server can't send an rpc to itself using "RPCMode.Server"!...bugged :[
-//					SendMovementInput(HInput, VInput);
+					SendMovementInput(HInput, VInput);
 				}else if(Network.isClient){
 					//SendMovementInput(HInput, VInput); //Use this (and line 64) for simple "prediction"
 					networkView.RPC("SendMovementInput", RPCMode.Server, HInput, VInput);
